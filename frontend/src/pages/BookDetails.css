@@ -1,0 +1,89 @@
+.book-details-container {
+    display: flex;
+    gap: 30px;
+    padding: 20px 0;
+}
+.book-content-area {
+    flex: 3;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.online-chat-box {
+    flex: 1;
+    min-width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+.online-chat-box h2 {
+    color: #6f42c1;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+.chat-messages {
+    flex-grow: 1;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.message {
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    max-width: 85%;
+    font-size: 0.9rem;
+}
+.own {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+}
+.other {
+    align-self: flex-start;
+    background-color: #f1f0f0;
+}
+.timestamp {
+    display: block;
+    font-size: 0.7rem;
+    color: #999;
+    text-align: right;
+}
+.chat-input-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.chat-input-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #6f42c1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.view-book-button {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .book-details-container {
+        flex-direction: column;
+    }
+    .online-chat-box {
+        min-width: unset;
+        width: 100%;
+    }
+}

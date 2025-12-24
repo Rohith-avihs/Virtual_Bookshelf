@@ -1,0 +1,12 @@
+.wishlist-container {
+    padding: 20px 0;
+}
+.wishlist-container h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
