@@ -2,6 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
+// Import Global Styles
+import './index.css';
+import './Components.css'; 
+
 // Pages
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
@@ -11,14 +15,22 @@ import AdminPanel from './pages/AdminPanel';
 
 // Components
 import Header from './components/Header';
-import ContactInfo from './components/ContactInfo'; // <-- IMPORTED HERE
+import ContactInfo from './components/ContactInfo';
 
-// --- Helper Component for Protected Routes ---
+/**
+ * Helper Component for Protected Routes
+ * Redirects unauthorized users and handles admin-only pages.
+ */
 const ProtectedRoute = ({ children, adminOnly = false }) => {
     const { isAuthenticated, user, isLoading } = useAuth();
 
     if (isLoading) {
-        return <div style={{textAlign: 'center', padding: '50px'}}>Loading user data...</div>; 
+        return (
+            <div className="loading-container">
+                <div className="spinner"></div>
+                <p>Loading your bookshelf...</p>
+            </div>
+        );
     }
 
     if (!isAuthenticated) {
@@ -31,18 +43,22 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
 
     return children;
 };
-// ------------------------------------------
 
+/**
+ * AppContent Component
+ * Contains the actual layout and route definitions.
+ */
 const AppContent = () => {
-    useAuth(); 
-
     return (
-        <>
+        <div className="app-container">
             <Header />
-            <main style={{ padding: '20px', minHeight: '80vh' }}>
+            
+            <main className="main-content">
                 <Routes>
+                    {/* Public Route */}
                     <Route path="/" element={<Home />} /> 
                     
+                    {/* Protected User Routes */}
                     <Route 
                         path="/dashboard" 
                         element={<ProtectedRoute><Dashboard /></ProtectedRoute>} 
@@ -58,23 +74,29 @@ const AppContent = () => {
                         element={<ProtectedRoute><BookDetails /></ProtectedRoute>} 
                     />
 
+                    {/* Admin Specific Route */}
                     <Route 
                         path="/admin" 
                         element={<ProtectedRoute adminOnly={true}><AdminPanel /></ProtectedRoute>} 
                     />
 
+                    {/* Fallback Catch-all */}
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </main>
             
-            {/* The public contact button is placed in the footer */}
-            <footer style={{borderTop: '1px solid #ddd', marginTop: '20px', paddingTop: '10px', textAlign: 'center'}}>
-                <ContactInfo /> {/* <-- RENDERED HERE */}
+            <footer className="footer-container">
+                <ContactInfo />
+                <p className="footer-copy">© 2026 Virtual Bookshelf. Built for Readers.</p>
             </footer>
-        </>
+        </div>
     );
 };
 
+/**
+ * Root App Component
+ * Wraps everything in Router and Auth Context.
+ */
 const App = () => (
     <Router>
         <AuthProvider>
