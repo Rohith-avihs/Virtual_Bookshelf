@@ -2,42 +2,45 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/api';
-import './BookCard.css'; // Assuming you will create this CSS file
+import './BookCard.css';
 
 const BookCard = ({ book, onWishlistUpdate, isAdminView, onDeleteBook }) => {
     const { user } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
+    
+    // Check if the current book is in the user's wishlist
     const isInWishlist = user?.wishlist?.includes(book._id);
 
-    // Handle adding/removing from wishlist (Requirement #2, #6)
+    // Handle adding/removing from wishlist
     const handleWishlistToggle = async () => {
         if (!user) return alert('Please log in to manage your wishlist.');
         setIsLoading(true);
+        
         const endpoint = isInWishlist ? `/wishlist/remove/${book._id}` : `/wishlist/add/${book._id}`;
         
         try {
             await api.put(endpoint);
-            // Notify parent component (Dashboard/Wishlist) to refresh data
+            // Notify parent to update local state so the UI reflects the change immediately
             onWishlistUpdate(book._id, !isInWishlist); 
         } catch (error) {
             console.error('Wishlist update failed:', error);
-            alert(`Failed to update wishlist: ${error.response?.data?.message || error.message}`);
+            alert(`Error: ${error.response?.data?.message || error.message}`);
         } finally {
             setIsLoading(false);
         }
     };
 
-    // Handle admin book deletion (Requirement #3)
+    // Handle admin book deletion
     const handleDelete = async () => {
-        if (!window.confirm(`Are you sure you want to delete the book: "${book.title}"?`)) return;
+        if (!window.confirm(`Permanently delete "${book.title}"?`)) return;
+        
         setIsLoading(true);
         try {
             await api.delete(`/books/${book._id}`);
-            onDeleteBook(book._id); // Notify parent to remove from list
-            alert('Book deleted successfully!');
+            onDeleteBook(book._id);
         } catch (error) {
             console.error('Book deletion failed:', error);
-            alert(`Failed to delete book: ${error.response?.data?.message || error.message}`);
+            alert(`Deletion failed: ${error.response?.data?.message || error.message}`);
         } finally {
             setIsLoading(false);
         }
@@ -45,25 +48,29 @@ const BookCard = ({ book, onWishlistUpdate, isAdminView, onDeleteBook }) => {
 
     return (
         <div className="book-card">
-            <h3>{book.title}</h3>
-            <p className="author">by {book.author}</p>
+            <div className="book-card-header">
+                <h3 className="book-title">{book.title}</h3>
+                <span className="wishlist-badge">
+                    {book.wishlistCount} {book.wishlistCount === 1 ? 'save' : 'saves'}
+                </span>
+            </div>
             
-            <div className="book-info">
-                <p>Wishlist Count: <strong>{book.wishlistCount}</strong></p>
-                {/* Requirements #4 & #8: View Book Button */}
-                <Link to={`/book/${book._id}`} className="button view-button">
-                    View Book
+            <p className="book-author">by {book.author}</p>
+            
+            <div className="book-card-body">
+                <Link to={`/book/${book._id}`} className="btn-view-details">
+                    View Details
                 </Link>
             </div>
 
-            <div className="book-actions">
+            <div className="book-card-footer">
                 {user && !isAdminView && (
                     <button 
                         onClick={handleWishlistToggle} 
                         disabled={isLoading}
-                        className={`button ${isInWishlist ? 'remove' : 'add-wishlist'}`}
+                        className={`btn-wishlist ${isInWishlist ? 'is-active' : ''}`}
                     >
-                        {isLoading ? '...' : isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                        {isLoading ? 'Processing...' : isInWishlist ? '★ In Wishlist' : '☆ Add to Wishlist'}
                     </button>
                 )}
                 
@@ -71,9 +78,9 @@ const BookCard = ({ book, onWishlistUpdate, isAdminView, onDeleteBook }) => {
                     <button 
                         onClick={handleDelete} 
                         disabled={isLoading}
-                        className="button delete-button"
+                        className="btn-admin-delete"
                     >
-                        {isLoading ? '...' : 'Delete Book (Admin)'}
+                        {isLoading ? 'Deleting...' : 'Delete Book'}
                     </button>
                 )}
             </div>
