@@ -1,45 +1,61 @@
+/* Header.css */
 .header-container {
-    background-color: #333;
-    color: white;
-    padding: 15px 30px;
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
+
 .logo a {
-    color: white;
-    text-decoration: none;
+    font-weight: 800;
     font-size: 1.5rem;
-    font-weight: bold;
+    background: linear-gradient(90deg, var(--accent), #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
 }
+
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 1.5rem;
 }
+
 .nav-item {
-    color: white;
     text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: 0.3s;
 }
+
 .nav-item:hover {
-    background-color: #555;
+    color: var(--accent);
 }
+
 .nav-welcome {
-    color: #ffd700; /* Gold color */
-    font-style: italic;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    border-right: 1px solid var(--border);
+    padding-right: 1.5rem;
 }
-.logout {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 15px;
+
+.btn-logout {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 4px;
+    font-weight: 600;
 }
-.logout:hover {
-    background-color: #c82333;
+
+.btn-logout:hover {
+    background: var(--danger);
+    color: white;
 }
