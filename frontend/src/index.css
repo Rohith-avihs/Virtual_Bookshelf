@@ -1,102 +1,37 @@
+/* index.css */
+:root {
+  --bg-dark: #0f172a;        /* Main background */
+  --bg-surface: #1e293b;     /* Card/Navbar background */
+  --accent: #38bdf8;         /* Primary Action color (Cyan) */
+  --accent-glow: rgba(56, 189, 248, 0.15);
+  --text-main: #f8fafc;      /* Bright white-ish text */
+  --text-muted: #94a3b8;     /* Grayish text for descriptions */
+  --border: #334155;         /* Subtle lines */
+  --danger: #ef4444;         /* Red for delete/logout */
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #000000; /* Black background */
-    color: #ffffff; /* White text */
-    min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
 }
 
-h1 {
-    text-align: center;
-    color: #ffffff; /* White heading */
-    margin-bottom: 30px;
-}
-
-#book-form {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-input {
-    padding: 10px;
-    border: 1px solid #cccccc; /* Light gray border */
-    border-radius: 4px;
-    background-color: #333333; /* Dark gray input background */
-    color: #ffffff; /* White text */
-}
-
-input::placeholder {
-    color: #cccccc; /* Gray placeholder text */
-}
-
-button {
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #ffffff; /* White text */
-    background-color: #333333; /* Dark gray background */
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #555555; /* Lighter gray on hover */
-}
-
-#upload-btn {
-    background-color: #007bff; /* Blue accent for upload button */
-}
-
-#upload-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
+/* Scannable Grid for Books */
 #bookshelf {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
 }
 
-.book {
-    background-color: #222222; /* Dark gray book card */
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
-    text-align: center;
-    border: 1px solid #444444; /* Gray border */
-}
-
-.book img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border: 1px solid #cccccc; /* Light border around images */
-}
-
-.book h3 {
-    margin: 0 0 10px;
-    color: #ffffff; /* White title */
-}
-
-.book p {
-    margin: 5px 0;
-    color: #cccccc; /* Gray text for author/genre */
-}
-
-.remove-btn {
-    background-color: #dc3545; /* Red for remove button */
-    color: #ffffff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 4px;
-}
-
-.remove-btn:hover {
-    background-color: #c82333; /* Darker red on hover */
-}
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
