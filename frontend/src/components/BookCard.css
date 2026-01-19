@@ -1,40 +1,117 @@
+/* BookCard.css */
+
 .book-card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    background-color: var(--bg-surface); /* #1e293b from your index.css */
+    border: 1px solid var(--border);    /* #334155 */
+    border-radius: 12px;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: white;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
 }
-.book-card h3 {
-    margin-top: 0;
-    color: #007bff;
+
+.book-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent); /* #38bdf8 */
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
 }
-.book-info {
-    margin: 15px 0;
-}
-.book-actions {
+
+.book-card-header {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 10px;
-    margin-top: 10px;
 }
-.book-actions button,
-.book-actions a {
-    flex-grow: 1;
+
+.book-title {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-main);
+    line-height: 1.4;
 }
-.add-wishlist {
-    background-color: #28a745;
+
+.wishlist-badge {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+}
+
+.book-author {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1.5rem 0;
+}
+
+.book-card-body {
+    margin-bottom: 1.5rem;
+}
+
+/* Primary Button Style */
+.btn-view-details {
+    display: block;
+    text-align: center;
+    background-color: var(--accent);
+    color: var(--bg-dark); /* Dark text on bright background */
+    text-decoration: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+}
+
+.btn-view-details:hover {
+    opacity: 0.9;
+}
+
+/* Wishlist Button Styles */
+.btn-wishlist {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.btn-wishlist:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn-wishlist.is-active {
+    background: rgba(56, 189, 248, 0.05);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Admin Styles */
+.btn-admin-delete {
+    width: 100%;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    padding: 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-admin-delete:hover:not(:disabled) {
+    background: var(--danger);
     color: white;
 }
-.add-wishlist:hover {
-    background-color: #1e7e34;
-}
-.remove {
-    background-color: #ffc107;
-    color: #333;
-}
-.remove:hover {
-    background-color: #e0a800;
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

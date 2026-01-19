@@ -1,4 +1,6 @@
+/* Header.css */
 .header-container {
+<<<<<<< HEAD
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,12 +12,33 @@
     color: white;
     font-size: 1.4rem;
     font-weight: bold;
+=======
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    font-weight: 800;
+    font-size: 1.5rem;
+    background: linear-gradient(90deg, var(--accent), #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+>>>>>>> f72f8c26c82f73f09454c46c7d553d72731b8025
     text-decoration: none;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     gap: 15px;   /* ✅ THIS MAKES THEM SIT NICELY */
 }
 
@@ -39,6 +62,40 @@
     border: none;
     color: white;
     padding: 6px 10px;
+=======
+    gap: 1.5rem;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    color: var(--accent);
+}
+
+.nav-welcome {
+    color: var(--text-main);
+    font-size: 0.9rem;
+    border-right: 1px solid var(--border);
+    padding-right: 1.5rem;
+}
+
+.btn-logout {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+>>>>>>> f72f8c26c82f73f09454c46c7d553d72731b8025
     cursor: pointer;
-    border-radius: 4px;
+    font-weight: 600;
+}
+
+.btn-logout:hover {
+    background: var(--danger);
+    color: white;
 }
