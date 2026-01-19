@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './Header.css'; // Assuming you will create this CSS file
+import ContactInfo from './ContactInfo';
+import './Header.css';
 
 const Header = () => {
     const { user, logout } = useAuth();
@@ -17,22 +18,29 @@ const Header = () => {
             <div className="logo">
                 <Link to={user ? '/dashboard' : '/'}>Virtual Bookshelf</Link>
             </div>
+
             <nav className="nav-links">
+                {/* ✅ Always visible */}
+                <ContactInfo />
+
                 {user ? (
                     <>
                         {user.isAdmin && (
-                            <Link to="/admin" className="nav-item">Admin Panel</Link>
+                            <Link to="/admin" className="nav-item">
+                                Admin Panel
+                            </Link>
                         )}
                         <Link to="/dashboard" className="nav-item">Books</Link>
                         <Link to="/wishlist" className="nav-item">Wishlist</Link>
-                        <span className="nav-welcome">Welcome, {user.name.split(' ')[0]}</span>
-                        <button onClick={onLogout} className="nav-button logout">Logout</button>
+                        <span className="nav-welcome">
+                            Welcome, {user.name.split(' ')[0]}
+                        </span>
+                        <button onClick={onLogout} className="nav-button logout">
+                            Logout
+                        </button>
                     </>
                 ) : (
-                    <>
-                        <Link to="/" className="nav-item">Login/Register</Link>
-                        {/* We will add a link to a general "Contact Us" page later */}
-                    </>
+                    <Link to="/" className="nav-item">Login/Register</Link>
                 )}
             </nav>
         </header>

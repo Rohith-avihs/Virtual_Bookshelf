@@ -8,6 +8,8 @@ import Dashboard from './pages/Dashboard';
 import Wishlist from './pages/Wishlist';
 import BookDetails from './pages/BookDetails';
 import AdminPanel from './pages/AdminPanel';
+import ContactPage from './pages/ContactPage';
+
 
 // Components
 import Header from './components/Header';
@@ -62,15 +64,15 @@ const AppContent = () => {
                         path="/admin" 
                         element={<ProtectedRoute adminOnly={true}><AdminPanel /></ProtectedRoute>} 
                     />
+                    <Route path="/contact" element={<ContactPage />} />
+
 
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </main>
             
             {/* The public contact button is placed in the footer */}
-            <footer style={{borderTop: '1px solid #ddd', marginTop: '20px', paddingTop: '10px', textAlign: 'center'}}>
-                <ContactInfo /> {/* <-- RENDERED HERE */}
-            </footer>
+            
         </>
     );
 };
